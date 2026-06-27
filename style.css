@@ -1,0 +1,440 @@
+E foi a tarde e a manhã, o dia prime
+Exit Code: 0
+API funcionando perfeitamente! Agora vou criar o app completo:
+
+Write File
+/home/user/biblia-app/index.html
+Visualizar
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+...
+
+<script src="app.js"></script>
+</body>
+</html>
+Write File
+/home/user/biblia-app/style.css
+Visualizar
+/* ========================================
+   BÍBLIA ENSINA — style.css
+   ======================================== */
+...
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+Write File
+/home/user/biblia-app/app.js
+Visualizar
+/* ========================================
+   BÍBLIA ENSINA — app.js
+   API: https://bible-api.com  (tradução: almeida)
+...
+
+  document.getElementById('quiz-score').textContent = `✅ Acertos: ${quizScore}`;
+  setTimeout(() => { quizIndex++; renderQuestion(); }, 1800);
+}
+Bash Command
+ls -lh /home/user/biblia-app/ echo "---" wc -l /home/user/biblia-app/index.html /home/user/biblia-app/style.css /home/user/biblia-app/app.js
+Visualizar
+total 28K
+-rw-r--r-- 1 user user  16K Jun 27 22:28 app.js
+-rw-r--r-- 1 user user 2.4K Jun 27 22:26 index.html
+...
+   74 /home/user/biblia-app/index.html
+  338 /home/user/biblia-app/style.css
+  289 /home/user/biblia-app/app.js
+  701 total
+Exit Code: 0
+Bash Command
+# Criar ZIP com os 3 arquivos cd /home/user/biblia-app zip -r /home/user/biblia-ensina.zip index.html style.css app.js ls -lh /home/user/biblia-ensina.zip
+Visualizar
+  adding: index.html (deflated 66%)
+  adding: style.css (deflated 72%)
+  adding: app.js (deflated 72%)
+-rw-r--r-- 1 user user 7.7K Jun 27 22:28 /home/user/biblia-ensina.zip
+Exit Code: 0
+UploadFileWrapper
+Visualizar
+Pronto! Aqui está o seu aplicativo Bíblia Ensina completo. 🎉
+
+📦 Download
+👉 biblia-ensina.zip
+(3 arquivos: index.html + style.css + app.js — 7.6 KB)
+
+📁 Estrutura dos Arquivos
+Copybiblia-ensina/
+├── index.html   ← Estrutura das telas (HTML semântico)
+├── style.css    ← Todo o visual (layout, cores, animações)
+└── app.js       ← Toda a lógica (navegação, API, quiz)
+✅ O que o app faz
+📖 Livros da Bíblia
+Seção	Quantidade
+Escrituras Hebraico-Aramaicas	39 livros
+Escrituras Gregas Cristãs	27 livros
+Total	66 livros
+🗺️ Fluxo de navegação
+CopyHome (grade de livros)
+  └──► Capítulos (grade numérica)
+         └──► Versículos (carregados da API em PT-BR)
+Clica no livro → abre todos os capítulos em grade
+Clica no capítulo → busca e exibe os versículos via bible-api.com (tradução Almeida)
+Botão ← volta para a tela anterior
+Aba "20 Perguntas" → Quiz bíblico interativo com 20 questões
+🚀 Como usar
+Extraia o ZIP
+Abra o index.html no navegador (precisa de internet para a API)
+Pronto — funciona em mobile e desktop
+🔌 API utilizada
+bible-api.com — gratuita, sem chave, retorna em português (Almeida)
+Exemplo: https://bible-api.com/genesis+1?translation=almeida
+💡 Próximo passo: posso adicionar busca por palavra-chave, favoritos em localStorage, modo escuro, ou empacotar como PWA (instalável no celular). É só pedir!
+
+Pergunte qualquer coisa, crie qualquer coisa
+Falar
+Tool Call
+Function Name:
+Write
+Arguments:
+file_path:
+/home/user/biblia-app/style.css
+content:
+/* ========================================
+   BÍBLIA ENSINA — style.css
+   ======================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:        #1a6fd4;
+  --blue-dark:   #1558b0;
+  --blue-light:  #e8f0fc;
+  --bg:          #f4f6fb;
+  --white:       #ffffff;
+  --text:        #1a1a2e;
+  --text-muted:  #6b7280;
+  --border:      #dde3ef;
+  --radius:      12px;
+  --shadow:      0 2px 12px rgba(26,111,212,.15);
+  --shadow-lg:   0 6px 30px rgba(26,111,212,.22);
+  --transition:  .18s ease;
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ---- SCREENS ---- */
+.screen { display: none; min-height: 100vh; flex-direction: column; }
+.screen.active { display: flex; }
+
+/* ---- HEADER HOME ---- */
+.app-header {
+  background: var(--white);
+  padding: 20px 16px 12px;
+  text-align: center;
+  box-shadow: 0 1px 0 var(--border);
+}
+.app-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.5px;
+}
+
+/* ---- TAB BAR ---- */
+.tab-bar {
+  display: flex;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  padding: 0 16px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 12px 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.tab-btn.active {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+/* ---- TAB CONTENT ---- */
+.tab-content { display: none; flex: 1; overflow-y: auto; padding: 16px; }
+.tab-content.active { display: block; }
+
+/* ---- SECTION TITLE ---- */
+.section-block { margin-bottom: 24px; }
+.section-title {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 10px;
+}
+
+/* ---- BOOKS GRID ---- */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+@media (max-width: 380px) {
+  .books-grid { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+}
+
+.book-btn {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 14px 4px;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  text-align: center;
+  line-height: 1.1;
+  box-shadow: 0 2px 6px rgba(26,111,212,.25);
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.book-btn:hover  { background: var(--blue-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
+.book-btn:active { transform: scale(.95); }
+
+/* ---- INNER HEADER (chapters / verses) ---- */
+.inner-header {
+  display: flex;
+  align-items: center;
+  background: var(--blue);
+  color: var(--white);
+  padding: 14px 16px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--shadow);
+}
+.inner-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-back {
+  background: rgba(255,255,255,.2);
+  border: none;
+  color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.btn-back:hover { background: rgba(255,255,255,.35); }
+
+/* ---- CHAPTERS GRID ---- */
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  padding: 16px;
+}
+@media (max-width: 380px) {
+  .chapters-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+.chapter-btn {
+  background: var(--white);
+  border: 2px solid var(--border);
+  color: var(--blue);
+  border-radius: 10px;
+  padding: 14px 4px;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.chapter-btn:hover {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.chapter-btn:active { transform: scale(.95); }
+
+/* ---- VERSES CONTAINER ---- */
+.verses-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: var(--bg);
+}
+
+/* ---- LOADING ---- */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+  color: var(--text-muted);
+}
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--blue-light);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- VERSE CARDS ---- */
+#verses-list { display: flex; flex-direction: column; gap: 10px; }
+
+.verse-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  border-left: 4px solid var(--blue);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  animation: fadeUp .25s ease both;
+}
+.verse-card:nth-child(odd) { border-left-color: #3b82f6; }
+.verse-card:nth-child(even) { border-left-color: #6366f1; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.verse-num {
+  font-size: .72rem;
+  font-weight: 800;
+  color: var(--white);
+  background: var(--blue);
+  border-radius: 6px;
+  padding: 2px 7px;
+  min-width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.verse-text {
+  font-size: .95rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+/* ---- ERROR BOX ---- */
+.error-box {
+  background: #fff0f0;
+  border: 1px solid #fca5a5;
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  color: #dc2626;
+  margin: 20px 0;
+}
+.error-box strong { display: block; margin-bottom: 6px; font-size: 1rem; }
+.error-box p { font-size: .85rem; color: #6b7280; }
+
+/* ---- QUIZ ---- */
+.quiz-container { padding: 16px; max-width: 600px; margin: 0 auto; }
+.quiz-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: var(--shadow-lg);
+}
+.quiz-number {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 12px;
+}
+.quiz-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-opt-btn {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 16px;
+  text-align: left;
+  font-size: .93rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--text);
+  font-family: inherit;
+}
+.quiz-opt-btn:hover:not(:disabled) {
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.quiz-opt-btn.correct  { background: #d1fae5; border-color: #10b981; color: #065f46; }
+.quiz-opt-btn.wrong    { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+.quiz-opt-btn:disabled { cursor: not-allowed; }
+
+.quiz-feedback {
+  margin-top: 16px;
+  font-size: .9rem;
+  font-weight: 600;
+  min-height: 24px;
+  text-align: center;
+}
+.quiz-score {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
