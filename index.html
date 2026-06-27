@@ -1,0 +1,200 @@
+
+Bíblia.pdf
+21.76 MB
+Me monta um Index CSS JS para mim montar um aplicativo que contenha a bíblia com esse layout 
+Separado por escrituras hebraica e gregas .
+Ou seja ao clicar nas iniciais do livro ele elevado para o ivro capitulo e texto específico ou seja os versículos 
+Resumir Documento Grande
+Qual é a estrutura geral do documento? Liste os primeiros livros com seus capítulos e versículos de exemplo, como Gênesis capítulo 1 versículos 1 a 5, para entender o padrão de formatação do texto bíblico neste PDF.
+Visualizar
+Entendi — o PDF contém o texto da Bíblia mas com codificação especial. Vou criar um aplicativo completo com HTML + CSS + JS com a estrutura exata da imagem, onde o texto bíblico é carregado via API pública gratuita da Bíblia (bible-api.com / api.bibliadigital.com.br em português). Assim fica 100% funcional sem depender do PDF.
+
+Bash Command
+echo "Testando API da Bíblia em português..." curl -s "https://bible-api.com/genesis+1:1?translation=almeida" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('text','erro')[:200])"
+Visualizar
+Testando API da Bíblia em português...
+No princípio criou Deus os céus e a terra.   
+Exit Code: 0
+Bash Command
+curl -s "https://bible-api.com/genesis+1:1-5?translation=almeida" | python3 -c " import sys,json d=json.load(sys.stdin) for v in d.get('verses',[]): print(f\"v{v['verse']}: {v['text'][:80]}\") "
+Visualizar
+v1: No princípio criou Deus os céus e a terra.   
+v2: A terra era sem forma e vazia; e havia trevas sobre a face do abismo, mas o Espí
+v3: Disse Deus: haja luz. E houve luz.   
+v4: Viu Deus que a luz era boa; e fez separação entre a luz e as trevas.   
+v5: E Deus chamou à luz dia, e às trevas noite. E foi a tarde e a manhã, o dia prime
+Exit Code: 0
+API funcionando perfeitamente! Agora vou criar o app completo:
+
+Write File
+/home/user/biblia-app/index.html
+Visualizar
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+...
+
+<script src="app.js"></script>
+</body>
+</html>
+Write File
+/home/user/biblia-app/style.css
+Visualizar
+/* ========================================
+   BÍBLIA ENSINA — style.css
+   ======================================== */
+...
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+Write File
+/home/user/biblia-app/app.js
+Visualizar
+/* ========================================
+   BÍBLIA ENSINA — app.js
+   API: https://bible-api.com  (tradução: almeida)
+...
+
+  document.getElementById('quiz-score').textContent = `✅ Acertos: ${quizScore}`;
+  setTimeout(() => { quizIndex++; renderQuestion(); }, 1800);
+}
+Bash Command
+ls -lh /home/user/biblia-app/ echo "---" wc -l /home/user/biblia-app/index.html /home/user/biblia-app/style.css /home/user/biblia-app/app.js
+Visualizar
+total 28K
+-rw-r--r-- 1 user user  16K Jun 27 22:28 app.js
+-rw-r--r-- 1 user user 2.4K Jun 27 22:26 index.html
+...
+   74 /home/user/biblia-app/index.html
+  338 /home/user/biblia-app/style.css
+  289 /home/user/biblia-app/app.js
+  701 total
+Exit Code: 0
+Bash Command
+# Criar ZIP com os 3 arquivos cd /home/user/biblia-app zip -r /home/user/biblia-ensina.zip index.html style.css app.js ls -lh /home/user/biblia-ensina.zip
+Visualizar
+  adding: index.html (deflated 66%)
+  adding: style.css (deflated 72%)
+  adding: app.js (deflated 72%)
+-rw-r--r-- 1 user user 7.7K Jun 27 22:28 /home/user/biblia-ensina.zip
+Exit Code: 0
+UploadFileWrapper
+Visualizar
+Pronto! Aqui está o seu aplicativo Bíblia Ensina completo. 🎉
+
+📦 Download
+👉 biblia-ensina.zip
+(3 arquivos: index.html + style.css + app.js — 7.6 KB)
+
+📁 Estrutura dos Arquivos
+Copybiblia-ensina/
+├── index.html   ← Estrutura das telas (HTML semântico)
+├── style.css    ← Todo o visual (layout, cores, animações)
+└── app.js       ← Toda a lógica (navegação, API, quiz)
+✅ O que o app faz
+📖 Livros da Bíblia
+Seção	Quantidade
+Escrituras Hebraico-Aramaicas	39 livros
+Escrituras Gregas Cristãs	27 livros
+Total	66 livros
+🗺️ Fluxo de navegação
+CopyHome (grade de livros)
+  └──► Capítulos (grade numérica)
+         └──► Versículos (carregados da API em PT-BR)
+Clica no livro → abre todos os capítulos em grade
+Clica no capítulo → busca e exibe os versículos via bible-api.com (tradução Almeida)
+Botão ← volta para a tela anterior
+Aba "20 Perguntas" → Quiz bíblico interativo com 20 questões
+🚀 Como usar
+Extraia o ZIP
+Abra o index.html no navegador (precisa de internet para a API)
+Pronto — funciona em mobile e desktop
+🔌 API utilizada
+bible-api.com — gratuita, sem chave, retorna em português (Almeida)
+Exemplo: https://bible-api.com/genesis+1?translation=almeida
+💡 Próximo passo: posso adicionar busca por palavra-chave, favoritos em localStorage, modo escuro, ou empacotar como PWA (instalável no celular). É só pedir!
+
+Pergunte qualquer coisa, crie qualquer coisa
+Falar
+Tool Call
+Function Name:
+Write
+Arguments:
+file_path:
+/home/user/biblia-app/index.html
+content:
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bíblia Ensina</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ========== TELA INICIAL (HOME) ========== -->
+<div id="screen-home" class="screen active">
+  <header class="app-header">
+    <h1>Bíblia Ensina</h1>
+  </header>
+
+  <div class="tab-bar">
+    <button class="tab-btn" onclick="showTab('tab-quiz')">20 Perguntas</button>
+    <button class="tab-btn active" onclick="showTab('tab-books')">Livros da Bíblia</button>
+  </div>
+
+  <!-- TAB: LIVROS -->
+  <div id="tab-books" class="tab-content active">
+    <section class="section-block">
+      <h2 class="section-title">Escrituras Hebraico-Aramaicas</h2>
+      <div class="books-grid" id="grid-hebrew"></div>
+    </section>
+    <section class="section-block">
+      <h2 class="section-title">Escrituras Gregas Cristãs</h2>
+      <div class="books-grid" id="grid-greek"></div>
+    </section>
+  </div>
+
+  <!-- TAB: QUIZ -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="quiz-container">
+      <div class="quiz-card" id="quiz-card">
+        <div class="quiz-number" id="quiz-num">Pergunta 1 / 20</div>
+        <div class="quiz-question" id="quiz-question">Carregando...</div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+      </div>
+      <div class="quiz-score" id="quiz-score"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TELA: CAPÍTULOS ========== -->
+<div id="screen-chapters" class="screen">
+  <header class="inner-header">
+    <button class="btn-back" onclick="goBack('home')">&#8592;</button>
+    <h2 id="chapter-book-title">Livro</h2>
+  </header>
+  <div class="chapters-grid" id="chapters-grid"></div>
+</div>
+
+<!-- ========== TELA: VERSÍCULOS ========== -->
+<div id="screen-verses" class="screen">
+  <header class="inner-header">
+    <button class="btn-back" onclick="goBack('chapters')">&#8592;</button>
+    <h2 id="verses-title">Capítulo</h2>
+  </header>
+  <div class="verses-container" id="verses-container">
+    <div class="loading-spinner" id="loading-spinner">
+      <div class="spinner"></div>
+      <p>Carregando versículos...</p>
+    </div>
+    <div id="verses-list"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
